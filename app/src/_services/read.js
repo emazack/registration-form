@@ -10,26 +10,21 @@ export default function Read() {
 
     useEffect(() => {
         getUser();
-        console.log("get user user effect");
     }, [])
 
+    const getUser = async (event) => {
 
-
-    const getUser = (event) => {
-        axios.get(`https://gorest.co.in/public/v2/users`,
+        const resp = await axios.get(`https://gorest.co.in/public/v2/users`,
             {
                 headers: {
                     Authorization: `Bearer ${MY_TOKEN}`
                 }
             })
-            .then((response) => {
-                setUsers(response.data);
-                console.log(users);
-            })
+        setUsers(resp.data);
     };
 
-    const deleteUser = (event) => {
-        console.log("delete user");
+    const deleteUser = (id) => {
+        console.log(`delete user ${id}`);
     };
 
     return (
@@ -46,14 +41,14 @@ export default function Read() {
                     </tr>
                 </thead>
                 <tbody>
-                    {users && users.map(user =>
+                    {users && users.length > 0 && users.map(user =>
                         <tr key={user.id}>
-                            <td>{user.firstName} {user.lastName}</td>
+                            <td>{user.name}</td>
                             <td>{user.email}</td>
-                            <td>{user.role}</td>
+                            <td>{user.gender}</td>
                             <td>
                                 <Link to={`/update/${user.id}`} className="">Edit</Link>
-                                <button onClick={() => deleteUser(user.id)} className="btn btn-sm btn-danger btn-delete-user" disabled={user.isDeleting}>
+                                <button onClick={() => deleteUser(user.id)} className="" disabled={user.isDeleting}>
                                     {user.isDeleting
                                         ? <span className="spinner"></span>
                                         : <span>Delete</span>
