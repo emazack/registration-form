@@ -48,6 +48,5 @@
 - Github - [emazack](https://github.com/emazack)
 - Linkedin EN - [@emazack](https://www.linkedin.com/in/emazack/?locale=en_US)
 - Linkedin IT - [@emazack](https://www.linkedin.com/in/emazack)
-###### The project is made by me from the scratch without babysitting help of anyone; I did not follow any kind of tutorial or step by step guidance
 
 ## License
