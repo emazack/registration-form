@@ -68,8 +68,8 @@ export default function Show(props) {
     return (
         <div>
             <h1>Users</h1>
-            <Link to="/add" className="">Add User</Link>
-            <table className="">
+            <Link to="/add" className="btn btn-sm btn-success mb-2">Add User</Link>
+            <table className="table table-striped">
                 <thead>
                     <tr>
                         <th style={{ width: '30%' }}>Name</th>
@@ -84,9 +84,9 @@ export default function Show(props) {
                             <td>{user.name}</td>
                             <td>{user.email}</td>
                             <td>{user.gender}</td>
-                            <td>
-                                <Link to="/update" className="" onClick={() => setLocalUserData(user)}>Edit</Link>
-                                <button onClick={() => deleteUser(user.id)} className="" disabled={user.isDeleting}>
+                            <td className='show-button-container'>
+                                <Link to="/update" className="btn btn-sm btn-primary mr-1" onClick={() => setLocalUserData(user)}>Edit</Link>
+                                <button onClick={() => deleteUser(user.id)} className="btn btn-sm btn-danger btn-delete-user" disabled={user.isDeleting}>
                                     {user.isDeleting
                                         ? <span className="spinner"></span>
                                         : <span>Delete</span>

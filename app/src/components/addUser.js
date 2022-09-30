@@ -34,14 +34,14 @@ export default function Add(props) {
     return (
         <form onSubmit={props.handleSubmit} action="" method="post">
 
-            <div className="container-field">
-                <label className="label-field-form" htmlFor="form-firstname">
+            <div className="mb-3">
+                <label className="form-label" htmlFor="form-firstname">
                     First name
                 </label>
                 <input
                     required
                     id="form-firstname"
-                    className="input-field"
+                    className="form-control"
                     name="firstName"
                     type="text"
                     value={props.firstName}
@@ -49,14 +49,14 @@ export default function Add(props) {
                 />
             </div>
 
-            <div className="container-field">
-                <label className="label-field-form" htmlFor="form-lastname">
+            <div className="mb-3">
+                <label className="form-label" htmlFor="form-lastname">
                     Last name
                 </label>
                 <input
                     required
                     id="form-lastname"
-                    className="input-field"
+                    className="form-control"
                     name="lastName"
                     type="text"
                     value={props.lastName}
@@ -64,27 +64,32 @@ export default function Add(props) {
                 />
             </div>
 
-            <div className="container-field">
-                <label className="label-field-form" htmlFor="form-email">
-                    email
+            <div className="mb-3">
+                <label className="form-label" htmlFor="form-email">
+                    Email
                 </label>
                 <input
                     required
                     id="form-email"
-                    className="input-field"
+                    className="form-control"
+                    aria-describedby="emailHelp"
                     name="email"
                     type="email"
                     value={props.email}
                     onChange={props.handleChange}
                 />
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
 
-            <div className="gender-container">
+            <div className="d-flex justify-content-center mb-3">
+                <label className="input-group-text" htmlFor="form-gender">
+                    Gender
+                </label>
                 <select
                     required
                     name="gender"
                     id="form-gender"
-                    className="form-gender"
+                    className="form-select"
                     value={props.gender}
                     onChange={props.handleChange}
                 >
@@ -95,7 +100,7 @@ export default function Add(props) {
             </div>
 
             <div className='button-container'>
-                <button onClick={addUser} type='submit'>Send</button>
+                <button onClick={addUser} className="btn btn-sm btn-success mb-2" type='submit'>Add</button>
             </div>
 
         </form>

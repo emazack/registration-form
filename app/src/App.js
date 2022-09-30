@@ -2,6 +2,9 @@ import './App.css';
 import Add from './components/addUser';
 import Show from './components/showUsers';
 import Update from './components/updateUser';
+import Header from './components/header';
+import Footer from './components/footer';
+import Index from './components/index';
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
@@ -34,11 +37,13 @@ const handleSubmit = (event) => {
   
   return (
     <Router>
+      <Header/>
       <div className="main">
-        <h1 className='title'>
-          React registration form
-        </h1>
         <Routes>
+        <Route exact path='/' 
+          element={<Index 
+                  />} 
+          />
           <Route exact path='/add' 
           element={<Add 
                   firstName={firstName}
@@ -78,6 +83,7 @@ const handleSubmit = (event) => {
           />
         </Routes>
       </div>
+      <Footer/>
     </Router>
   );
 }

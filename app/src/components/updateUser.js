@@ -47,14 +47,14 @@ const updateUser = () => {
     return (
         <form onSubmit={props.handleSubmit} action="" method="put">
 
-        <div className="container-field">
-            <label className="label-field-form" htmlFor="form-completename">
+        <div className="mb-3">
+            <label className="form-label" htmlFor="form-completename">
                 Name
             </label>
             <input
                 required
                 id="form-completename"
-                className="input-field"
+                className="form-control"
                 name="completeName"
                 type="text"
                 value={props.completeName}
@@ -62,14 +62,14 @@ const updateUser = () => {
             />
         </div>
 
-        <div className="container-field">
-            <label className="label-field-form" htmlFor="form-email">
+        <div className="mb-3">
+            <label className="form-label" htmlFor="form-email">
                 email
             </label>
             <input
                 required
                 id="form-email"
-                className="input-field"
+                className="form-control"
                 name="email"
                 type="email"
                 value={props.email}
@@ -77,12 +77,15 @@ const updateUser = () => {
             />
         </div>
 
-        <div className="gender-container">
+        <div className="input-group mb-3">
+        <label className="input-group-text" htmlFor="form-gender">
+                    Gender
+                </label>
             <select
                 required
                 name="gender"
                 id="form-gender"
-                className="form-gender"
+                className="form-select"
                 value={props.gender}
                 onChange={props.handleChange}
             >
@@ -93,7 +96,7 @@ const updateUser = () => {
         </div>
 
         <div className='button-container'>
-            <button onClick={updateUser} type='submit'>Update</button>
+            <button onClick={updateUser} className="btn btn-sm btn-primary mr-1" type='submit'>Update</button>
         </div>
 
     </form>

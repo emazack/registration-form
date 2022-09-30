@@ -1,7 +1,33 @@
-.main{
+.main, .footer, .header, .link-container{
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
   flex-direction: column;
+}
+.header, .footer{
+  background-color: #343a40;
+}
+.header{
+  height: 10vh;
+  align-items: left;
+  padding: 0 20px;
+}
+.header .link{
+  max-width: fit-content;
+}
+.main{
+  min-height: 80vh;
+  background-color: #f8f9fa;
+  align-items: center;
+  padding: 20px;
+}
+.footer{
+  height: 10vh;
+  align-items: center;
+}
+.footer .credits{
+  font-size: 12px;
+}
+
+.show-button-container {
+  white-space: nowrap;
 }
