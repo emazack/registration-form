@@ -1,33 +1,22 @@
-import React, { useState } from 'react';
 import axios from 'axios';
 
 
-export default function Create() {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [gender, setGender] = useState('');
-
-    const MY_TOKEN = "791c3fed1a4a35e204a631f55c5a92ec627644c2de78e6de53bd06e886fe44f8";
+export default function Create(props) {
 
     const handleChange = (event) => {
         if (event.target.name === "firstName") {
-            setFirstName(event.target.value);
+            props.setFirstName(event.target.value);
         } else if (event.target.name === "lastName") {
-            setLastName(event.target.value);
+            props.setLastName(event.target.value);
         } else if (event.target.name === "email") {
-            setEmail(event.target.value);
+            props.setEmail(event.target.value);
         } else if (event.target.name === "gender") {
-            setGender(event.target.value);
+            props.setGender(event.target.value);
         }
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(firstName);
-        console.log(lastName);
-        console.log(gender);
-        console.log(email);
     };
 
     const createUser = (event) => {
@@ -40,7 +29,7 @@ export default function Create() {
         },
             {
                 headers: {
-                    Authorization: `Bearer ${MY_TOKEN}`
+                    Authorization: `Bearer ${props.MY_TOKEN}`
                 }
             })
             .then((result) => {
@@ -59,7 +48,7 @@ export default function Create() {
         axios.get(`https://gorest.co.in/public/v2/users`,
             {
                 headers: {
-                    Authorization: `Bearer ${MY_TOKEN}`
+                    Authorization: `Bearer ${props.MY_TOKEN}`
                 }
             })
             .then((response) => {
@@ -83,7 +72,7 @@ export default function Create() {
                     className="input-field"
                     name="firstName"
                     type="text"
-                    value={firstName}
+                    value={props.firstName}
                     onChange={handleChange}
                 />
             </div>
@@ -98,7 +87,7 @@ export default function Create() {
                     className="input-field"
                     name="lastName"
                     type="text"
-                    value={lastName}
+                    value={props.lastName}
                     onChange={handleChange}
                 />
             </div>
@@ -113,7 +102,7 @@ export default function Create() {
                     className="input-field"
                     name="email"
                     type="email"
-                    value={email}
+                    value={props.email}
                     onChange={handleChange}
                 />
             </div>
@@ -124,7 +113,7 @@ export default function Create() {
                     name="gender"
                     id="form-gender"
                     className="form-gender"
-                    value={gender}
+                    value={props.gender}
                     onChange={handleChange}
                 >
                     <option value="">Select an option</option>
