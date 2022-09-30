@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router';
 
 
 export default function Update(props) {
 
     const [id, setId] = useState(null);
+    let navigate = useNavigate();
 
     useEffect(() => {
         setId(localStorage.getItem('id'))
@@ -23,6 +25,10 @@ const updateUser = () => {
             headers: {
                 Authorization: `Bearer ${props.MY_TOKEN}`
             }
+        })
+        .then((result) => {
+            console.log(result.data);
+            navigate('/show');
         })
         .catch((error) => {
             if (error.response) {

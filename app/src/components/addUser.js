@@ -1,9 +1,11 @@
 import axios from 'axios';
+import { useNavigate } from 'react-router';
 
 
-export default function Create(props) {
+export default function Add(props) {
+    let navigate = useNavigate();
 
-    const createUser = () => {
+    const addUser = () => {
         axios.post(`https://gorest.co.in/public/v2/users`, {
             name: `${props.firstName} ${props.lastName}`,
             email: props.email,
@@ -17,6 +19,7 @@ export default function Create(props) {
             })
             .then((result) => {
                 console.log(result.data);
+                navigate('/show');
             })
             .catch((error) => {
                 if (error.response.data && error.response.data.lenght > 0) {
@@ -27,7 +30,6 @@ export default function Create(props) {
             })
     };
 
-    // createUser();
 
     return (
         <form onSubmit={props.handleSubmit} action="" method="post">
@@ -93,7 +95,7 @@ export default function Create(props) {
             </div>
 
             <div className='button-container'>
-                <button onClick={createUser} type='submit'>Send</button>
+                <button onClick={addUser} type='submit'>Send</button>
             </div>
 
         </form>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 
-export default function Read(props) {
+export default function Show(props) {
 
     const [users, setUsers] = useState({});
 
@@ -11,8 +11,7 @@ export default function Read(props) {
         getUser();
     }, [])
 
-    const getUser = async (event) => {
-
+    const getUser = async () => {
         const resp = await axios.get(`https://gorest.co.in/public/v2/users`,
             {
                 headers: {
@@ -42,8 +41,6 @@ export default function Read(props) {
         localStorage.setItem('gender', gender);
     }
 
-
-
     const deleteUser = (id) => {
         axios.delete(`https://gorest.co.in/public/v2/users/${id}`,
             {
@@ -71,7 +68,7 @@ export default function Read(props) {
     return (
         <div>
             <h1>Users</h1>
-            <Link to="/create" className="">Add User</Link>
+            <Link to="/add" className="">Add User</Link>
             <table className="">
                 <thead>
                     <tr>
