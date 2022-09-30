@@ -5,7 +5,6 @@ import axios from 'axios';
 
 export default function Read(props) {
 
-    const MY_TOKEN = "791c3fed1a4a35e204a631f55c5a92ec627644c2de78e6de53bd06e886fe44f8";
     const [users, setUsers] = useState({});
 
     useEffect(() => {
@@ -17,14 +16,56 @@ export default function Read(props) {
         const resp = await axios.get(`https://gorest.co.in/public/v2/users`,
             {
                 headers: {
-                    Authorization: `Bearer ${MY_TOKEN}`
+                    Authorization: `Bearer ${props.MY_TOKEN}`
                 }
             })
+            .catch((error) => {
+                if (error.response) {
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log('Error', error.message);
+                }
+                console.log(error.config);
+            });
         setUsers(resp.data);
     };
 
+    const setLocalUserData = (data) => {
+        let { id, name, email, gender } = data;
+        localStorage.setItem('id', id);
+        localStorage.setItem('name', name);
+        localStorage.setItem('email', email);
+        localStorage.setItem('gender', gender);
+    }
+
+
+
     const deleteUser = (id) => {
-        console.log(`delete user ${id}`);
+        axios.delete(`https://gorest.co.in/public/v2/users/${id}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${props.MY_TOKEN}`
+                }
+            })
+            .then(() => {
+                getUser();
+            })
+            .catch((error) => {
+                if (error.response) {
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log('Error', error.message);
+                }
+                console.log(error.config);
+            });
     };
 
     return (
@@ -47,7 +88,7 @@ export default function Read(props) {
                             <td>{user.email}</td>
                             <td>{user.gender}</td>
                             <td>
-                                <Link to={`/update/${user.id}`} className="">Edit</Link>
+                                <Link to="/update" className="" onClick={() => setLocalUserData(user)}>Edit</Link>
                                 <button onClick={() => deleteUser(user.id)} className="" disabled={user.isDeleting}>
                                     {user.isDeleting
                                         ? <span className="spinner"></span>

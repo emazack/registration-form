@@ -10,9 +10,12 @@ function App() {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [gender, setGender] = useState('');
+  const [completeName, setCompleteName] = useState('');
+
   const MY_TOKEN = "791c3fed1a4a35e204a631f55c5a92ec627644c2de78e6de53bd06e886fe44f8";
 
   const handleChange = (event) => {
+    console.log("sto endelando");
     if (event.target.name === "firstName") {
         setFirstName(event.target.value);
     } else if (event.target.name === "lastName") {
@@ -21,7 +24,9 @@ function App() {
         setEmail(event.target.value);
     } else if (event.target.name === "gender") {
         setGender(event.target.value);
-    }
+    } else if (event.target.name === "completeName") {
+      setCompleteName(event.target.value);
+  }
 };
 
 const handleSubmit = (event) => {
@@ -51,7 +56,10 @@ const handleSubmit = (event) => {
                   handleSubmit={handleSubmit} 
                   />} 
           />
-          <Route path='/read' element={<Read />} />
+          <Route path='/read' 
+          element={<Read 
+                  MY_TOKEN={MY_TOKEN}
+                  />} />
           <Route path='/update' 
           element={<Update
                   firstName={firstName}
@@ -62,6 +70,8 @@ const handleSubmit = (event) => {
                   setEmail={setEmail}
                   gender={gender}
                   setGender={setGender}
+                  completeName={completeName}
+                  setCompleteName={setCompleteName}
                   MY_TOKEN={MY_TOKEN}
                   handleChange={handleChange}
                   handleSubmit={handleSubmit} 
