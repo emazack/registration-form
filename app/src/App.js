@@ -4,6 +4,7 @@ import Show from './components/showUsers';
 import Update from './components/updateUser';
 import Header from './components/header';
 import Footer from './components/footer';
+import Error from './components/error';
 import Index from './components/index';
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
@@ -14,8 +15,21 @@ function App() {
   const [email, setEmail] = useState('');
   const [gender, setGender] = useState('');
   const [completeName, setCompleteName] = useState('');
+  const [error, setError] = useState([]);
 
   const MY_TOKEN = "791c3fed1a4a35e204a631f55c5a92ec627644c2de78e6de53bd06e886fe44f8";
+
+  const handleDataError = (errorResponseData) => {
+    let errors = [];
+    errorResponseData.forEach(dataError => {
+      errors.push(`${dataError.field} ${dataError.message}`);
+    });
+    setError(errors);
+  };
+
+  // const handleResponse = (response) => {
+
+  // };
 
   const handleChange = (event) => {
     if (event.target.name === "firstName") {
@@ -38,13 +52,17 @@ const handleSubmit = (event) => {
   return (
     <Router>
       <Header/>
-      <div className="main">
+      <Error
+      error={error}
+      setError={setError}
+      />
+      <main className="main">
         <Routes>
         <Route exact path='/' 
           element={<Index 
                   />} 
           />
-          <Route exact path='/add' 
+          <Route path='/add' 
           element={<Add 
                   firstName={firstName}
                   setFirstName={setFirstName}
@@ -56,7 +74,8 @@ const handleSubmit = (event) => {
                   setGender={setGender}
                   MY_TOKEN={MY_TOKEN} 
                   handleChange={handleChange} 
-                  handleSubmit={handleSubmit} 
+                  handleSubmit={handleSubmit}
+                  handleDataError={handleDataError} 
                   />} 
           />
           <Route path='/show' 
@@ -78,11 +97,12 @@ const handleSubmit = (event) => {
                   setCompleteName={setCompleteName}
                   MY_TOKEN={MY_TOKEN}
                   handleChange={handleChange}
-                  handleSubmit={handleSubmit} 
+                  handleSubmit={handleSubmit}
+                  handleDataError={handleDataError}  
                    />} 
           />
         </Routes>
-      </div>
+      </main>
       <Footer/>
     </Router>
   );

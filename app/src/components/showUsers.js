@@ -5,7 +5,7 @@ import axios from 'axios';
 
 export default function Show(props) {
 
-    const [users, setUsers] = useState({});
+    const [users, setUsers] = useState(false);
 
     useEffect(() => {
         getUser();
@@ -42,6 +42,13 @@ export default function Show(props) {
     }
 
     const deleteUser = (id) => {
+        let userIsDeleting = users.map(user => {
+            if (user.id === id) {
+                user.isDeleting = true;
+            }
+            return user;
+        })
+        setUsers(userIsDeleting);
         axios.delete(`https://gorest.co.in/public/v2/users/${id}`,
             {
                 headers: {
@@ -49,7 +56,7 @@ export default function Show(props) {
                 }
             })
             .then(() => {
-                getUser();
+                setUsers(users => users.filter(user => user.id !== id));
             })
             .catch((error) => {
                 if (error.response) {
@@ -66,51 +73,53 @@ export default function Show(props) {
     };
 
     return (
-        <div>
-            <h1>Users</h1>
-            <Link to="/add" className="btn btn-sm btn-success mb-2">Add User</Link>
-            <table className="table table-striped">
-                <thead>
-                    <tr>
-                        <th style={{ width: '30%' }}>Name</th>
-                        <th style={{ width: '30%' }}>Email</th>
-                        <th style={{ width: '30%' }}>Gender</th>
-                        <th style={{ width: '10%' }}></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users && users.length > 0 && users.map(user =>
-                        <tr key={user.id}>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
-                            <td>{user.gender}</td>
-                            <td className='show-button-container'>
-                                <Link to="/update" className="btn btn-sm btn-primary mr-1" onClick={() => setLocalUserData(user)}>Edit</Link>
-                                <button onClick={() => deleteUser(user.id)} className="btn btn-sm btn-danger btn-delete-user" disabled={user.isDeleting}>
-                                    {user.isDeleting
-                                        ? <span className="spinner"></span>
-                                        : <span>Delete</span>
-                                    }
-                                </button>
-                            </td>
-                        </tr>
-                    )}
-                    {!users &&
-                        <tr>
-                            <td colSpan="4" className="">
-                                <div className="spinner"></div>
-                            </td>
-                        </tr>
-                    }
-                    {users && !users.length &&
-                        <tr>
-                            <td colSpan="4" className="">
-                                <div className="">No Users To Display</div>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+        <div className='show-users-page'>
+            {!users &&
+                <div className="text-center">
+                    <div className="spinner-border text-primary" role="status"></div>
+                </div>
+            }
+            {users &&
+                <div className='show-users-container'>
+                    <h1>Users</h1>
+                    <Link to="/add" className="btn btn-sm btn-success mb-2">Add User</Link>
+                    <table className="table table-striped">
+                        <thead>
+                            <tr>
+                                <th style={{ width: '30%' }}>Name</th>
+                                <th style={{ width: '30%' }}>Email</th>
+                                <th style={{ width: '30%' }}>Gender</th>
+                                <th style={{ width: '10%' }}></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {users.length > 0 && users.map(user =>
+                                <tr key={user.id}>
+                                    <td>{user.name}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.gender}</td>
+                                    <td className='show-button-container'>
+                                        <Link to="/update" className="btn btn-sm btn-primary mr-1" onClick={() => setLocalUserData(user)}>Edit</Link>
+                                        <button onClick={() => deleteUser(user.id)} className="btn btn-sm btn-danger btn-delete-user" disabled={user.isDeleting}>
+                                            {user.isDeleting
+                                                ? <span className="spinner-border spinner-border-sm text-warning"></span>
+                                                : <span>Delete</span>
+                                            }
+                                        </button>
+                                    </td>
+                                </tr>
+                            )}
+                            {!users.length &&
+                                <tr>
+                                    <td colSpan="4" className="">
+                                        <div className="">No Users To Display</div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
         </div>
     )
 }

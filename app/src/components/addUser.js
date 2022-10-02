@@ -1,9 +1,17 @@
 import axios from 'axios';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
 
 export default function Add(props) {
     let navigate = useNavigate();
+
+    useEffect(() => {
+        props.setFirstName('');
+        props.setLastName('');
+        props.setEmail('');
+        props.setGender('');;
+    }, []);
 
     const addUser = () => {
         axios.post(`https://gorest.co.in/public/v2/users`, {
@@ -22,12 +30,17 @@ export default function Add(props) {
                 navigate('/show');
             })
             .catch((error) => {
-                if (error.response.data && error.response.data.lenght > 0) {
-                    error.response.data.forEach(element => {
-                        console.table(element);
-                    });
+                if (error.response) {
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log('Error', error.message);
                 }
-            })
+                console.log(error.config);
+            });
     };
 
 
@@ -78,18 +91,20 @@ export default function Add(props) {
                     value={props.email}
                     onChange={props.handleChange}
                 />
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
             </div>
 
-            <div className="d-flex justify-content-center mb-3">
-                <label className="input-group-text" htmlFor="form-gender">
-                    Gender
-                </label>
+            <div className="input-group mb-3">
+                <div className='input-group-prepend'>
+                    <label className="input-group-text" htmlFor="form-gender">
+                        Gender
+                    </label>
+                </div>
                 <select
                     required
                     name="gender"
                     id="form-gender"
-                    className="form-select"
+                    className="custom-select"
                     value={props.gender}
                     onChange={props.handleChange}
                 >
@@ -100,7 +115,7 @@ export default function Add(props) {
             </div>
 
             <div className='button-container'>
-                <button onClick={addUser} className="btn btn-sm btn-success mb-2" type='submit'>Add</button>
+                <button onClick={addUser} className="btn btn-sm btn-success mb-2 mt-2" type='submit'>Add</button>
             </div>
 
         </form>

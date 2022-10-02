@@ -4,7 +4,9 @@ export default function Header() {
 
     return (
         <header className='header'>
-            <Link to="/" className="link">User manager</Link>
+            <nav className='nav-link'>
+                <Link to="/" className="link">User manager</Link>
+            </nav>
         </header>
     )
 }
