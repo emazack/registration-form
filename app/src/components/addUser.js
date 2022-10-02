@@ -31,13 +31,11 @@ export default function Add(props) {
             })
             .catch((error) => {
                 if (error.response) {
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
+                    props.handleDataError(error.response.data);
                 } else if (error.request) {
-                    console.log(error.request);
+                    props.setError('no response was received by server. Try later')
                 } else {
-                    console.log('Error', error.message);
+                    props.setError('something went wrong')
                 }
                 console.log(error.config);
             });

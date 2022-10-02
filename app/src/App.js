@@ -27,10 +27,6 @@ function App() {
     setError(errors);
   };
 
-  // const handleResponse = (response) => {
-
-  // };
-
   const handleChange = (event) => {
     if (event.target.name === "firstName") {
         setFirstName(event.target.value);
@@ -75,12 +71,14 @@ const handleSubmit = (event) => {
                   MY_TOKEN={MY_TOKEN} 
                   handleChange={handleChange} 
                   handleSubmit={handleSubmit}
-                  handleDataError={handleDataError} 
+                  handleDataError={handleDataError}
+                  setError={setError} 
                   />} 
           />
           <Route path='/show' 
           element={<Show 
                   MY_TOKEN={MY_TOKEN}
+                  handleDataError={handleDataError}
                   />} 
           />
           <Route path='/update' 
@@ -98,7 +96,8 @@ const handleSubmit = (event) => {
                   MY_TOKEN={MY_TOKEN}
                   handleChange={handleChange}
                   handleSubmit={handleSubmit}
-                  handleDataError={handleDataError}  
+                  handleDataError={handleDataError}
+                  setError={setError}  
                    />} 
           />
         </Routes>

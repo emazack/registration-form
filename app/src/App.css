@@ -27,7 +27,12 @@
 .footer .credits{
   font-size: 12px;
 }
-
 .show-button-container {
   white-space: nowrap;
+}
+.alert{
+  padding: 16px 36px;
+}
+ul, .alert{
+  margin-bottom: unset;
 }
