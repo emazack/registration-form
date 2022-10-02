@@ -54,7 +54,7 @@ const handleSubmit = (event) => {
       />
       <main className="main">
         <Routes>
-        <Route exact path='/' 
+        <Route exact path='/user-manager' 
           element={<Index 
                   />} 
           />
