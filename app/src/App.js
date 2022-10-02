@@ -79,6 +79,7 @@ const handleSubmit = (event) => {
           element={<Show 
                   MY_TOKEN={MY_TOKEN}
                   handleDataError={handleDataError}
+                  setError={setError}
                   />} 
           />
           <Route path='/update' 

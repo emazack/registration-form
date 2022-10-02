@@ -58,13 +58,11 @@ export default function Show(props) {
             })
             .catch((error) => {
                 if (error.response) {
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
+                    props.handleDataError(error.response.data);
                 } else if (error.request) {
-                    console.log(error.request);
+                    props.setError('no response was received by server. Try later')
                 } else {
-                    console.log('Error', error.message);
+                    props.setError('something went wrong')
                 }
                 console.log(error.config);
             });
@@ -84,18 +82,18 @@ export default function Show(props) {
                     <table className="table table-striped">
                         <thead>
                             <tr>
-                                <th style={{ width: '30%' }}>Name</th>
-                                <th style={{ width: '30%' }}>Email</th>
-                                <th style={{ width: '30%' }}>Gender</th>
-                                <th style={{ width: '10%' }}></th>
+                                <th scope="col" style={{ width: '30%' }}>Name</th>
+                                <th scope="col" style={{ width: '30%' }}>Email</th>
+                                <th scope="col" style={{ width: '30%' }}>Gender</th>
+                                <th scope="col" style={{ width: '10%' }}></th>
                             </tr>
                         </thead>
                         <tbody>
                             {users.length > 0 && users.map(user =>
                                 <tr key={user.id}>
-                                    <td>{user.name}</td>
-                                    <td>{user.email}</td>
-                                    <td>{user.gender}</td>
+                                    <td data-label="Name">{user.name}</td>
+                                    <td data-label="Email">{user.email}</td>
+                                    <td data-label="Gender">{user.gender}</td>
                                     <td className='show-button-container'>
                                         <Link to="/update" className="btn btn-sm btn-primary mr-1" onClick={() => setLocalUserData(user)}>Edit</Link>
                                         <button onClick={() => deleteUser(user.id)} className="btn btn-sm btn-danger btn-delete-user" disabled={user.isDeleting}>
