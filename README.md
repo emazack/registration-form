@@ -4,7 +4,7 @@ a basic React CRUD for handling users.
 
 ## Table of contents 
 
-- [Overview - Run the App](#overview-run-the-app)
+- [Overview - Run the App](#overview---run-the-app)
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
