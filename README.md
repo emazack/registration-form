@@ -1,5 +1,5 @@
 # User manager
-This is a application made with the React that allows listing, adding, editing and deleting records from an Object API.
+This is an application made with the React that allows listing, adding, editing and deleting records from an Object API.
 a basic React CRUD for handling users.
 
 ## Table of contents 
@@ -31,7 +31,7 @@ The online page can give some unexpected 404 error page. The issue is that GitHu
 
 ## My process
 
-This is a project done in React. I used github as a versioning system to keep track of my progress. The project was developed entirely with the use of the English language. I started by studying the API to contact; I started with a GET and a POST of the data, then I decided to complete the project by inserting the DELETE and EDIT. I felt it was important to have a responsive layout and major error handling. Later I focused on bug fixes and general optimization. The structure of the project is basic and provides excellent ideas for future engineering.
+This is a project done in React. I used github as a versioning system to keep track of my progress. The project was developed entirely with the use of the English language. I started by studying the API to contact; first a GET and a POST of the data, then I decided to complete the project by inserting the DELETE and EDIT. I felt it was important to have a responsive layout and major error handling. Later I focused on bug fixes and general optimization. The structure of the project is basic and provides excellent ideas for future engineering. In the end the project is online.
 
 ### Built with
 
@@ -44,7 +44,7 @@ This is a project done in React. I used github as a versioning system to keep tr
 
 ### Continued development
 
-I find interesting optimizing the design and component structure in the future. It might be a good idea to separate functions from presentation logic by creating separate spaces for services and functions that are used from components. It might also be a good idea to limit some repetition of jsx code, by creating centralized components for adding and editing records.
+I find interesting the idea of optimizing the design and component structure in the future. It might be a good idea to separate functions from presentation logic by creating separate spaces for services and functions that are used from components. It might also be a good idea to limit some repetition of jsx code, by creating centralized components for adding and editing records.
 
 ## Author
 
